@@ -10,7 +10,7 @@ RUN mvn clean package -DskipTests
 #
 # package stage
 #
-FROM openjdk:11-ea-17-jre-slim
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/springboot-0.0.1-SNAPSHOT.jar /app/springboot-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
