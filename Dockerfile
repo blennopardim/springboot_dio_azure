@@ -1,15 +1,17 @@
 #
 # Build Stage
 #
-FROM maven:3.6.3-jdk-11-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -DskipTests -f /home/app/pom.xml clean package
+FROM maven:3.8.4-openjdk-17-slim AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
 #
 # package stage
 #
-FROM openjdk:17-jdk-oracle
-COPY --from=build /home/app/target/springboot-0.0.1-SNAPSHOT.jar /usr/local/lib/springboot-0.0.1-SNAPSHOT.jar
+FROM openjdk:11-ea-17-jre-slim
+WORKDIR /app
+COPY --from=build /app/target/springboot-0.0.1-SNAPSHOT.jar .
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/springboot-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/springboot-0.0.1-SNAPSHOT.ja"]
