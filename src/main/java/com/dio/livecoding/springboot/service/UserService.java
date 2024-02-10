@@ -33,7 +33,7 @@ public class UserService {
             .email(userDTO.getEmail())
             .build();
         log.info("Creating user {}", userModel);
-        return userRepository.save(userModel);
+        return userRepository.saveAndFlush(userModel);
     }
 
     public UserModel update(Long id, UserDTO userDTO) {
@@ -44,7 +44,7 @@ public class UserService {
         userModel.setName(userDTO.getName());
         userModel.setEmail(userDTO.getEmail());
         log.info("Updating user {}", userModel);
-        return userRepository.save(userModel);
+        return userRepository.saveAndFlush(userModel);
     }
 
     public void delete(Long id) {

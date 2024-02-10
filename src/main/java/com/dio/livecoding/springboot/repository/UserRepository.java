@@ -1,10 +1,9 @@
 package com.dio.livecoding.springboot.repository;
 
-import org.springframework.data.repository.CrudRepository;
-
 import com.dio.livecoding.springboot.model.UserModel;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends CrudRepository<UserModel, Long>{
+public interface UserRepository extends JpaRepository<UserModel, Long>{
 
     
 }
