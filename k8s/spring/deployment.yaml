@@ -27,11 +27,20 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://mysql-headless:3306/springbootdb?createDatabaseIfNotExist=true
+              valueFrom:
+                secretKeyRef:
+                  name: spring-datasource
+                  key: SPRING_DATASOURCE_URL
             - name: SPRING_DATASOURCE_USERNAME
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: spring-datasource
+                  key: SPRING_DATASOURCE_USERNAME
             - name: SPRING_DATASOURCE_PASSWORD
-              value: password
+              valueFrom:
+                secretKeyRef:
+                  name: spring-datasource
+                  key: SPRING_DATASOURCE_PASSWORD
           resources: # QoS Guaranteed limit e request iguais
             limits:
               cpu: 500m
